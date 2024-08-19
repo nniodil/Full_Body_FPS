@@ -122,8 +122,6 @@ public class PlayerController : MonoBehaviour
         {
             skin.transform.localRotation = Quaternion.identity;
         }
-
-
     }
 
     void Jump()
@@ -171,9 +169,6 @@ public class PlayerController : MonoBehaviour
         {
             topCheck.transform.localPosition = new Vector3(0, 1.55f, 0);
         }
-        
-        
-        
         
         if (Input.GetKeyDown(KeyCode.LeftControl) && !isCrouch && canCrouch && isGrounded)
         {
@@ -282,9 +277,7 @@ public class PlayerController : MonoBehaviour
             characterController.center = new Vector3(0, -0.65f, 0);
             walkSpeed = 2;
             Debug.Log("crouched");
-
         }
-
 
         IEnumerator SlideDuration()
         {
@@ -302,9 +295,9 @@ public class PlayerController : MonoBehaviour
             isSliding = false;
             animator.SetBool("Sliding", false);
             animator.CrossFade("Crouch Walking", 0.05f);
-
         }
     }
+    
     void CameraLook()
     {
         //Get mouse axis values
@@ -317,7 +310,6 @@ public class PlayerController : MonoBehaviour
         cameraPosY -= mouseAxis.y * mouseSensitivity;
         cameraPosY = Mathf.Clamp(cameraPosY, -90, 90);
         cam.transform.localEulerAngles = Vector3.right * cameraPosY;
-
 
         cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, desiredPosition, 4 * Time.deltaTime);
     }
@@ -337,6 +329,7 @@ public class PlayerController : MonoBehaviour
         //if player is not grounded then apply gravity
         characterController.Move(velocity * Time.deltaTime);
     }
+    
     void Animations()
     {
         //Not Crouched
@@ -354,8 +347,8 @@ public class PlayerController : MonoBehaviour
 
                 animator.SetBool("Idle", true);
                 animator.CrossFade("Idle", 0.2f);
-
             }
+            
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             {
                 animator.SetBool("Idle", false);
@@ -403,7 +396,6 @@ public class PlayerController : MonoBehaviour
                 animator.CrossFade("Walking", 0.2f);
             }
 
-
             //Right Strafe
             if (Input.GetKey(KeyCode.D) && animator.GetBool("Left Strafe") == false)
             {
@@ -425,9 +417,6 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("Left Strafe", false);
                 animator.CrossFade("Idle", 0.2f);
             }
-
-
         }
-
     }
 }
